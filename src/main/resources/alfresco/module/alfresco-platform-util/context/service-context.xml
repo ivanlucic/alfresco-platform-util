@@ -21,8 +21,7 @@
           http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
           
     <bean id="platformUtil.nodeUtil" class="com.ilucic.alfrescoplatformutil.NodeUtil">
-        <property name="nodeService" value="NodeService" />
+        <property name="nodeService" ref="NodeService" />
     </bean>
 
-    
 </beans>
