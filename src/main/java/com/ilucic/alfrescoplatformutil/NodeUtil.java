@@ -10,6 +10,9 @@ import org.alfresco.service.cmr.repository.NodeRef;
 import org.alfresco.service.cmr.repository.NodeService;
 import org.alfresco.service.namespace.QName;
 import org.alfresco.service.namespace.QNamePattern;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Service;
 
 import com.google.common.collect.Lists;
 
@@ -19,8 +22,11 @@ import com.google.common.collect.Lists;
  * @author Ivan Lucic
  *
  */
+@Service("platformUtil.nodeUtil")
 public class NodeUtil {
 
+	@Autowired
+	@Qualifier("NodeService")
 	private NodeService nodeService;
 	
 	/**
@@ -230,9 +236,5 @@ public class NodeUtil {
 	 */
 	protected Serializable getProperty(NodeRef nodeRef, QName qname) {
 		return nodeService.getProperty(nodeRef, qname);
-	}
-	
-	public void setNodeService(NodeService nodeService) {
-		this.nodeService = nodeService;
 	}
 }

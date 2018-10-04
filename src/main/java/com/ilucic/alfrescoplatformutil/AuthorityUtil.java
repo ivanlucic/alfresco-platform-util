@@ -12,6 +12,9 @@ import org.alfresco.service.cmr.security.PersonService;
 import org.alfresco.service.namespace.NamespaceService;
 import org.alfresco.service.namespace.QName;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Service;
 
 /**
  * Utility for users and groups.
@@ -19,10 +22,17 @@ import org.apache.commons.lang3.StringUtils;
  * @author Ivan Lucic
  *
  */
+@Service("platformUtil.authorityUtil")
 public class AuthorityUtil {
 
+	@Autowired
+	@Qualifier("AuthorityService")
 	private AuthorityService authorityService;
+	@Autowired
+	@Qualifier("PersonService")
 	private PersonService personService;
+	@Autowired
+	@Qualifier("platformUtil.nodeUtil")
 	private NodeUtil nodeUtil;
 	
 	public static final QName PROP_MIDDLE_NAME = QName.createQName(NamespaceService.CONTENT_MODEL_1_0_URI, "middleName");
@@ -178,15 +188,5 @@ public class AuthorityUtil {
 			NodeRef user = personService.getPerson(userName);
 			return nodeUtil.getStringProperty(user, prop);
 		}).collect(Collectors.toList());
-	}
-	
-	public void setAuthorityService(AuthorityService authorityService) {
-		this.authorityService = authorityService;
-	}
-	public void setPersonService(PersonService personService) {
-		this.personService = personService;
-	}
-	public void setNodeUtil(NodeUtil nodeUtil) {
-		this.nodeUtil = nodeUtil;
 	}
 }
