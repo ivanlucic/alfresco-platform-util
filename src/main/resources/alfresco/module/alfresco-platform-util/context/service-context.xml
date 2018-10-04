@@ -23,5 +23,10 @@
     <bean id="platformUtil.nodeUtil" class="com.ilucic.alfrescoplatformutil.NodeUtil">
         <property name="nodeService" ref="NodeService" />
     </bean>
-
+    
+    <bean id="platformUtil.authorityUtil" class="com.ilucic.alfrescoplatformutil.AuthorityUtil">
+        <property name="authorityService" ref="AuthorityService" />
+        <property name="personService" ref="PersonService" />
+        <property name="nodeUtil" ref="platformUtil.nodeUtil" />
+    </bean>
 </beans>
